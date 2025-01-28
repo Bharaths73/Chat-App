@@ -78,13 +78,12 @@ exports.updateUserImage=async(req,res)=>{
         const pictureUrl=updatedPicture.secure_url;
         const image_id=updatedPicture.public_id;
 
-        const updatedUser=await User.findByIdAndUpdate({_id:id},{image:pictureUrl},{new:true},{runValidators:true});
+        const updatedUser=await User.findByIdAndUpdate({_id:id},{image:pictureUrl,image_id:image_id},{new:true},{runValidators:true});
 
         return res.status(200).json({
             success:true,
             message:"User image updated successfully",
             user:updatedUser,
-            image_id:image_id,
         })
 
     } catch (error) {
@@ -119,7 +118,7 @@ exports.deleteUserImage=async(req,res)=>{
 
         await this.deleteImageFromCloudinary(image_id)
 
-        const updatedUser=await User.findByIdAndUpdate({_id:id},{image:null},{new:true},{runValidators:true});
+        const updatedUser=await User.findByIdAndUpdate({_id:id},{image:null,image_id:null},{new:true},{runValidators:true});
 
         return res.status(200).json({
             success:true,

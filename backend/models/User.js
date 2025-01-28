@@ -24,6 +24,10 @@ const User=new mongoose.Schema({
         type:String,
         required:false,
     },
+    image_id:{
+        type:String,
+        required:false,
+    },
     profileSetup:{
         type:Boolean,
         default:false,

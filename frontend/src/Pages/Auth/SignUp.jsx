@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { signUp } from '../../Services/Opeartion/Auth';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const[signUpData, setSignUpData]=useState({
@@ -11,6 +13,8 @@ function SignUp() {
       confirmPassword:''
     });
     const [loading, setLoading] = useState(false);
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
   
     const signUpHandler=(e)=>{
       setSignUpData((prevData)=>({
@@ -27,7 +31,7 @@ function SignUp() {
        }
           setLoading(true);
           try {
-            const result = await signUp(signUpData);
+            const result = await signUp(signUpData,dispatch,navigate);
             if (result) {
               console.log("SignUp successful:", result);
             }

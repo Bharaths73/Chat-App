@@ -101,6 +101,7 @@ exports.signUp=async(req,res)=>{
             firstName:null,
             lastName:null,
             image:null, 
+            image_id:null,
             profileSetup:false,
         })
 
@@ -123,6 +124,27 @@ exports.signUp=async(req,res)=>{
             success:true,
             message:"User is registered successfully",
             user:newUser,
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Internal server error",
+            error:error.message,
+        })
+    }
+}
+
+exports.logout=async(req,res)=>{
+    try {
+        const options={
+            expires:new Date(Date.now()-1000),
+            httpOnly:true,
+        }
+
+        res.cookie('token',"",options).status(200).json({
+            success:true,
+            message:"Logout Successfull",
         })
     } catch (error) {
         console.log(error);

@@ -34,6 +34,10 @@ function Profile() {
         toast.error("Last Name is required");
         return false;
     }
+    if(data.firstName===userData.firstName && data.lastName===userData.lastName){
+      toast.error("No Changes");
+      return false;
+    }
     return true
   }
 

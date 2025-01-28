@@ -36,7 +36,40 @@ export async function login({email,password},dispatch,navigate) {
     }
 }
 
-export async function signUp({email,password,confirmPassword}) {
+export async function logout(token,dispatch,navigate) {
+    const toastId=toast.loading("Logging off...")
+    try {
+        const result=await apiConnector('post',Auth.LOGOUT_API,null,{Authorization:`Bearer ${token}`,withCredentials:true})
+
+        console.log("Logout Response is ",result);
+
+        if(!result.data.success){
+            console.log(result.data.message);
+            throw new Error(result.data.message)
+        }
+
+        dispatch(setToken(null));
+        dispatch(setUserData(null));
+        localStorage.removeItem("token")
+        localStorage.removeItem("user")
+        navigate('/')
+        toast.success("Logout Success")
+        // return result.data;
+    } catch (error) {
+        console.log("logout error is ",error);
+        const errorMessage =
+            error.response && error.response.data && error.response.data.message
+                ? error.response.data.message
+                : "Logout failed";
+
+        toast.error(errorMessage);
+    }
+    finally{
+        toast.dismiss(toastId)
+    }
+}
+
+export async function signUp({email,password,confirmPassword},dispatch,navigate) {
     const toastId=toast.loading("Creating...")
     try {
         const result=await apiConnector('post',Auth.SIGNUP_API,{email,password,confirmPassword})
@@ -48,6 +81,11 @@ export async function signUp({email,password,confirmPassword}) {
             throw new Error(result.data.message)
         }
 
+        dispatch(setToken(result.data.user.token));
+        dispatch(setUserData(result.data.user))
+        localStorage.setItem("token", JSON.stringify(result.data.user.token))
+        localStorage.setItem("user", JSON.stringify(result.data.user))
+        navigate('/chat')
         toast.success("Created Account Successfully")
         return result.data;
     } catch (error) {
@@ -108,8 +146,8 @@ export async function updateProfileImage(formData,dispatch,token) {
             throw new Error(result.data.message)
         }
 
-        dispatch(setUserData({...result.data.user,image_id: result.data.image_id}))
-        localStorage.setItem("user", JSON.stringify({...result.data.user,image_id: result.data.image_id}))
+        dispatch(setUserData(result.data.user))
+        localStorage.setItem("user", JSON.stringify(result.data.user))
         toast.success("Successfully Updated Profile Image")
     } catch (error) {
         console.log("Update error is ",error);

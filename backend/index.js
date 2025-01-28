@@ -7,6 +7,7 @@ dotenv.config();
 const database=require('./config/database');
 const authRoutes=require('./routes/Auth');
 const profileRoutes=require('./routes/Profile');
+const contactsRoutes=require('./routes/Contacts')
 const fileUpload=require('express-fileupload');
 const { cloudinaryConnection } = require('./config/cloudinary');
 const PORT=process.env.PORT || 3000;
@@ -30,6 +31,7 @@ cloudinaryConnection();
 
 app.use('/api/v1/auth',authRoutes);
 app.use('/api/v1/profile',profileRoutes);
+app.use('/api/v1/contacts',contactsRoutes);
 
 // app.use('/',(req,res)=>{
 //     console.log("Server is running");
