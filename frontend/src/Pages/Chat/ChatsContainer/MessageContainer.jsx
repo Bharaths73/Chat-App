@@ -137,7 +137,7 @@ function MessageContainer() {
   },[selectedChatData,selectedChatType,dispatch])
 
   return (
-    <div className='flex-1 overflow-y-auto scrollbar-hidden p-4 px-8 md:w-[65vw] lg:w-[70vw] xl:md-[80vw] w-full'>
+    <div className='flex-1 overflow-y-auto scrollbar-none p-4 px-8 md:w-[65vw] lg:w-[70vw] xl:md-[80vw] w-full'>
       {renderMessages()}
       <div ref={scrollRef}>
          {

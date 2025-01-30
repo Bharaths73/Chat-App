@@ -39,7 +39,7 @@ function ContactsContainer() {
             <Title text='Direct Messages'/>
             <NewDm/>
           </div>
-          <div className='max-h-[38vh] overflow-y-auto scrollbar-hidden'>
+          <div className='max-h-[38vh] overflow-y-auto scrollbar-none'>
             <ContactsList contacts={directMessagesContacts}/>
           </div>
         </div>
