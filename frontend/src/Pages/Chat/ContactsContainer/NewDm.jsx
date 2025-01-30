@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Tooltip,
     TooltipContent,
@@ -68,10 +68,17 @@ function NewDm() {
     const selectNewContact=(contact)=>{
        setOpenNewContactModal(false)
        dispatch(setSelectedChatType("contact"))
+       console.log("chat type ",selectedChatType);
        console.log("contact is ",contact);
        dispatch(setSelectedChatData(contact))
+       console.log("chat is ",selectedChatData);
        setSearchedContacts([])
     }
+
+    useEffect(() => {
+      console.log("Updated chat type: ", selectedChatType);
+      console.log("Updated chat data: ", selectedChatData);
+  }, [selectedChatType, selectedChatData]); 
 
   return (
     <>

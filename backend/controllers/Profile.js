@@ -1,28 +1,7 @@
 const User = require("../models/User");
+const { uploadImageToCloudinary, deleteImageFromCloudinary } = require("../utils/Cloudinary");
 const cloudinary=require('cloudinary').v2
 require('dotenv').config();
-
-exports.uploadImageToCloudinary=async(file,folder,height,quality)=>{
-    const options={folder};
-    if(height){
-        options.height=height
-    }
-    if(quality){
-        options.quality=quality
-    }
-
-    options.resource_type='auto'
-
-    return await cloudinary.uploader.upload(file.tempFilePath,options)
-}
-
-exports.deleteImageFromCloudinary = async (image_id) => {
-    try {
-        return await cloudinary.uploader.destroy(image_id);
-    } catch (error) {
-        throw new Error("Failed to delete image from Cloudinary");
-    }
-};
 
 exports.updateUserData=async(req,res)=>{
     try {
@@ -74,7 +53,7 @@ exports.updateUserImage=async(req,res)=>{
             })
         }
 
-        const updatedPicture=await this.uploadImageToCloudinary(profileImage,process.env.FOLDER_NAME)
+        const updatedPicture=await uploadImageToCloudinary(profileImage,process.env.FOLDER_NAME)
         const pictureUrl=updatedPicture.secure_url;
         const image_id=updatedPicture.public_id;
 
@@ -116,7 +95,7 @@ exports.deleteUserImage=async(req,res)=>{
             });
         }
 
-        await this.deleteImageFromCloudinary(image_id)
+        await deleteImageFromCloudinary(image_id)
 
         const updatedUser=await User.findByIdAndUpdate({_id:id},{image:null,image_id:null},{new:true},{runValidators:true});
 

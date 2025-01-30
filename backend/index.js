@@ -8,8 +8,11 @@ const database=require('./config/database');
 const authRoutes=require('./routes/Auth');
 const profileRoutes=require('./routes/Profile');
 const contactsRoutes=require('./routes/Contacts')
+const messageRoutes=require('./routes/Messages')
 const fileUpload=require('express-fileupload');
 const { cloudinaryConnection } = require('./config/cloudinary');
+const { setupSocket } = require('./socket');
+const http=require('http')
 const PORT=process.env.PORT || 3000;
 
 database.connect();
@@ -32,6 +35,7 @@ cloudinaryConnection();
 app.use('/api/v1/auth',authRoutes);
 app.use('/api/v1/profile',profileRoutes);
 app.use('/api/v1/contacts',contactsRoutes);
+app.use('/api/v1/messages',messageRoutes);
 
 // app.use('/',(req,res)=>{
 //     console.log("Server is running");
@@ -41,6 +45,10 @@ app.use('/api/v1/contacts',contactsRoutes);
 //     })
 // })
 
-app.listen(PORT,()=>{
+
+const server = http.createServer(app);
+setupSocket(server);
+
+server.listen(PORT,()=>{
     console.log('Server is running on port ',PORT);
 })

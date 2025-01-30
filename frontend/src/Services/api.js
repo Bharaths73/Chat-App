@@ -14,4 +14,10 @@ export const Profile={
 
 export const Contacts={
     SEARCH_CONTACTS_API:BASE_URL+'/contacts/search-contacts',
+    GET_CONTACTS_API:BASE_URL+'/contacts/get-contacts',
+}
+
+export const Messages={
+    GET_MESSAGES_API:BASE_URL+'/messages/get-messages',
+    UPLOAD_FILE_API:BASE_URL+'/messages/upload-file',
 }
