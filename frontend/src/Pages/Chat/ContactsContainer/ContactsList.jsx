@@ -23,7 +23,7 @@ function ContactsList({contacts,isChannel=false}) {
         }
     }
   return (
-    <div className="mt-5">
+    <div className="mt-5 flex flex-col gap-2">
       {contacts.map((contact, index) => (
         <div
           key={index}
@@ -34,7 +34,7 @@ function ContactsList({contacts,isChannel=false}) {
           }`}
           onClick={() => handleClick(contact)}
         >
-          <div className="flex flex-col gap-5 justify-center items-start text-neutral-300">
+          <div className="flex gap-5 items-center justify-start text-neutral-300">
             {!isChannel && (
               <div className="flex gap-2 items-center justify-center">
                 {/* <div className="w-10 h-10 relative"> */}

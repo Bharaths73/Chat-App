@@ -43,11 +43,11 @@ function ContactsContainer() {
             <ContactsList contacts={directMessagesContacts}/>
           </div>
         </div>
-        <div className=' cursor-pointer'>
+        {/* <div className=' cursor-pointer'>
           <div className='flex items-center justify-between pr-10 ml-3'>
             <Title text='Channels'/>
           </div>
-        </div>
+        </div> */}
         </div>
         <ProfileInfo/>
     </div>

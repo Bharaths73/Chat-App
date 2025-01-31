@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const SERVER_URL = import.meta.env.VITE_APP_SERVER_URL;
 import io from 'socket.io-client'
-import { addMessage } from "../Slices/ChatSlice";
+import { addMessage, setDirectMessagesContacts } from "../Slices/ChatSlice";
 
 const SocketContext = createContext(null);
 
@@ -36,6 +36,13 @@ export const SocketProvider=({children})=>{
                 // }
 
                 dispatch(addMessage(message))
+                if(message.recipient._id!==userData._id){
+                    dispatch(setDirectMessagesContacts(message.recipient))
+                }
+                else{
+                    dispatch(setDirectMessagesContacts(message.sender))
+                }
+                
             }
 
             socket.current.on('receiveMessage',handleReceiveMessage)

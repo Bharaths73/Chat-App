@@ -25,7 +25,17 @@ const chatSlice=createSlice({
             state.selectedChatMessages=value.payload
         },
         setDirectMessagesContacts(state,value){
-            state.directMessagesContacts=value.payload
+            if (Array.isArray(value.payload)) {
+                state.directMessagesContacts = value.payload;
+            } else {
+                const exists = state.directMessagesContacts.some(
+                    contact => contact._id === value.payload._id
+                );
+        
+                if (!exists) {
+                    state.directMessagesContacts.unshift(value.payload);
+                }
+            }
         },
         addMessage(state,action){
             const message = action.payload;

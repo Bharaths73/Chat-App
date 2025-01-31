@@ -27,7 +27,7 @@ function MessageContainer() {
      return imageRegex.test(filePath)
   }
 
-  const downloadFile = async (fileUrl, fileName) => {
+  const downloadFile = async (fileUrl) => {
     try {
       // Fetch the file from Cloudinary URL
       const response = await axios.get(fileUrl,{responseType:"blob"});
@@ -45,13 +45,14 @@ function MessageContainer() {
       // Create a link element to trigger the download
       const link = document.createElement('a');
       link.href = URL.createObjectURL(fileBlob);
-      link.download = "Temp_File"; // Set the file name for download
+      link.download = fileUrl.split("/").pop(); // Set the file name for download
       link.click(); // Trigger the download
       link.remove()
       window.URL.revokeObjectURL(fileBlob)
       console.log('File downloaded successfully');
     } catch (error) {
       console.error('Error downloading the file:', error.message);
+      toast.error("Failed to download file")
     }
   };
   
@@ -63,7 +64,7 @@ function MessageContainer() {
       const messageDate=moment(message.timeStamp).format('YYYY-MM-DD');
       const showDate=messageDate!==lastDate
       lastDate=messageDate
-      console.log("message seleceted data ",selectedChatData)
+      console.log("message selected data ",selectedChatData)
       console.log("message data ",message)
        return ( <div key={index}>
         {
@@ -85,7 +86,7 @@ function MessageContainer() {
       return <div className={`${message.sender===selectedChatData._id? "text-left" : "text-right"}`}>
          {
            message.messageType === 'text' && (
-            <div className={`${message?.sender!==selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-white/20"} border inline-block px-4 py-2 rounded my-1 max-w-[50%] break-words`}>
+            <div className={`${message?.sender!==selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-white/20"} border inline-block px-4 py-2 rounded my-1 sm:max-w-[50%] break-words max-w-[80%] text-left`}>
             {
               message?.content
             }
@@ -93,7 +94,7 @@ function MessageContainer() {
            )
          }
          {
-           message.messageType==='file' && <div className={`${message?.sender!==selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-white/20"} border inline-block px-4 py-2 rounded my-1 max-w-[50%] break-words`}>
+           message.messageType==='file' && <div className={`${message?.sender!==selectedChatData._id ? "bg-[#8417ff]/5 text-[#8417ff]/90 border-[#8417ff]/50" : "bg-[#2a2b33]/5 text-white/80 border-white/20"} border inline-block px-4 py-2 rounded my-1 sm:max-w-[50%] max-w-[80%]`}>
              {
                checkIfImage(message.fileUrl) ? <div className='cursor-pointer' onClick={()=>{setShowImage(true);
                 setImageUrl(message.fileUrl)}
@@ -103,7 +104,7 @@ function MessageContainer() {
                 <span className='text-white/80 text-3xl bg-black/20 rounded-full p-3'>
                     <MdFolderZip/>
                 </span>
-                <span>{'fileName'}</span>
+                <span className='truncate'>{message.fileUrl.split('/').pop()}</span>
                 <span className='bg-black/20 p-3 text-2xl rounded-full hover:bg-black/50 cursor-pointer transition-all duration-300' onClick={()=>downloadFile(message.fileUrl)}>
                   <IoMdDownload className=''/>
                 </span>
@@ -141,7 +142,7 @@ function MessageContainer() {
       {renderMessages()}
       <div ref={scrollRef}>
          {
-           showImage && <div className='fixed z-[1000] top-0 left-0 h-[100vh] w-[100vw] flex items-center justify-center backdrop:blur-lg flex-col'>
+           showImage && <div className='fixed z-[1000] top-0 left-0 h-[100vh] w-[100vw] flex items-center justify-center backdrop-blur-md flex-col'>
             <div>
               <img src={imageUrl} className='h-[80vh] w-full bg-cover'/>
             </div>
