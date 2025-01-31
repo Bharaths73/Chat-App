@@ -1,6 +1,6 @@
 # 💬 MERN Chat App  
 
-A real-time chat application built using *MongoDB, Express.js, React.js, and Node.js (MERN Stack). This app supports **direct messaging* between users with real-time updates. 🚀  
+A real-time chat application built using MongoDB, Express.js, React.js, and Node.js (MERN Stack). This app supports direct messaging between users with real-time updates. 🚀  
 
 ## 🔥 Features  
 
@@ -21,7 +21,7 @@ A real-time chat application built using *MongoDB, Express.js, React.js, and Nod
 
 ### 1️⃣ Clone the Repository  
 ```bash
-git clone https://github.com/your-username/mern-chat-app.git
+git clone https://github.com/Bharaths73/Chat-App
 ```
 
 
