@@ -15,9 +15,9 @@ function ContactsContainer() {
   const getContacts=async()=>{
      try {
         const result=await getContactsDm(token,dispatch);
-        if(result){
-          console.log("result is ",result);
-        }
+        // if(result){
+        //   console.log("result is ",result);
+        // }
      } catch (error) {
       
      } 

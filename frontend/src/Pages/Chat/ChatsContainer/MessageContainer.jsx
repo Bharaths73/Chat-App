@@ -31,7 +31,6 @@ function MessageContainer() {
     try {
       // Fetch the file from Cloudinary URL
       const response = await axios.get(fileUrl,{responseType:"blob"});
-      console.log("Cloudinary response is ",response);
       
   
       // Check if the file was fetched successfully
@@ -49,9 +48,7 @@ function MessageContainer() {
       link.click(); // Trigger the download
       link.remove()
       window.URL.revokeObjectURL(fileBlob)
-      console.log('File downloaded successfully');
     } catch (error) {
-      console.error('Error downloading the file:', error.message);
       toast.error("Failed to download file")
     }
   };
@@ -64,8 +61,6 @@ function MessageContainer() {
       const messageDate=moment(message.timeStamp).format('YYYY-MM-DD');
       const showDate=messageDate!==lastDate
       lastDate=messageDate
-      console.log("message selected data ",selectedChatData)
-      console.log("message data ",message)
        return ( <div key={index}>
         {
            showDate && <div className='text-center text-gray-500'>

@@ -28,11 +28,8 @@ function SignIn() {
 
     try {
       const result = await login(signInData,dispatch,navigate);
-      if (result) {
-        console.log("Login successful:", result);
-      }
     } catch (error) {
-      console.error("Error during sign-in:", error.message || error);
+      // console.error("Error during sign-in:", error.message || error);
     } finally {
       setLoading(false);
     }

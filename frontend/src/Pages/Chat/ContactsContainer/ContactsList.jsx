@@ -7,7 +7,6 @@ import avatar from '../../../assets/avatar.jpg'
 function ContactsList({contacts,isChannel=false}) {
     const {selectedChatType,selectedChatData,selectedChatMessages,directMessagesContacts}=useSelector((state)=>state.chat)
     const dispatch=useDispatch()
-    console.log("DirectMessage is ",directMessagesContacts);
     
 
     const handleClick=(contact)=>{

@@ -23,12 +23,12 @@ export const SocketProvider=({children})=>{
             socket.current=io(SERVER_URL,{query:{userId:userData._id}});
             
             socket.current.on('connect',()=>{
-                console.log('Connected to socket');
+                // console.log('Connected to socket');
             })
 
             const handleReceiveMessage=(message)=>{
-                console.log("selected chat ",selectedChatData);
-                console.log("client message is ",message);
+                // console.log("selected chat ",selectedChatData);
+                // console.log("client message is ",message);
                 
                 // if(selectedChatType && ( selectedChatData?._id===message?.sender?._id || selectedChatData?._id===message?.recipient?._id)){
                 //     console.log("message rec ",message);

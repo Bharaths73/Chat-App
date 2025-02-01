@@ -8,7 +8,6 @@ function PrivateRoute({ children }) {
 
   // Check if token exists (user is authenticated)
   if (!token) {
-    console.log("User not authenticated, redirecting to '/'");
     return <Navigate to="/" />;
   }
 

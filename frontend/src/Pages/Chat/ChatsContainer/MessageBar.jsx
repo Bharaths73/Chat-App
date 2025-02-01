@@ -6,6 +6,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSocket } from '../../../context/SocketContext';
 import { sendFile } from '../../../Services/Opeartion/Messages';
+import toast from 'react-hot-toast';
 
 function MessageBar() {
     const[message,setMessage]=useState('');
@@ -37,7 +38,8 @@ function MessageBar() {
 
     const sendMessage=()=>{
         if (!socket) {
-            console.error("Socket is not connected. Cannot send message.");
+            // console.error("Socket is not connected. Cannot send message.");
+            toast.error("Cannot connect to server")
             return;
           }
         if(selectedChatType==='contact'){
@@ -69,7 +71,6 @@ function MessageBar() {
     const handleAttachmentChange=async(e)=>{
         try {
             const file=e.target.files[0];
-            console.log("file is ",file);
             
             if(file){
                 const formData=new FormData();
@@ -87,8 +88,8 @@ function MessageBar() {
             }
             
         } catch (error) {
-            console.log("error is ",error);
-            
+            // console.log("error is ",error);
+            toast.error("Failed to send message")
         }
     }
 

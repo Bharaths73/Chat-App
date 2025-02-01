@@ -9,10 +9,7 @@ export const getMessages=async(token,dispatch,id)=>{
     try {
         const response=await apiConnector('GET',Messages.GET_MESSAGES_API+`/${id}`,null,{Authorization:`Bearer ${token}`,withCredentials:true})
 
-        console.log("Get Messages Response is ",response);
-
         if(!response.data.success){
-            console.log(response.data.message);
             throw new Error(response.data.message)
         }
 
@@ -20,7 +17,6 @@ export const getMessages=async(token,dispatch,id)=>{
         // return result;
         toast.success("Messages fetched Successfully")
     } catch (error) {
-        console.log("Get messages error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -39,17 +35,13 @@ export const sendFile=async(formData,token,dispatch)=>{
     try {
         const response=await apiConnector('POST',Messages.UPLOAD_FILE_API,formData,{Authorization:`Bearer ${token}`,withCredentials:true,"Content-Type": "multipart/form-data"})
 
-        console.log("Sending File Response is ",response);
-
         if(!response.data.success){
-            console.log(response.data.message);
             throw new Error(response.data.message)
         }
         result=response.data.fileUrl ? response.data.fileUrl : null;
         toast.success("File sent Successfully")
         return result;
     } catch (error) {
-        console.log("File error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message

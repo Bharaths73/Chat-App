@@ -32,11 +32,8 @@ function SignUp() {
           setLoading(true);
           try {
             const result = await signUp(signUpData,dispatch,navigate);
-            if (result) {
-              console.log("SignUp successful:", result);
-            }
           } catch (error) {
-            console.error("Error during sign-up:", error.message || error);
+            // console.error("Error during sign-up:", error.message || error);
           } finally {
             setLoading(false);
           }

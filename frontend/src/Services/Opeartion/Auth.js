@@ -8,10 +8,7 @@ export async function login({email,password},dispatch,navigate) {
     try {
         const result=await apiConnector('post',Auth.LOGIN_API,{email,password})
 
-        console.log("Login Response is ",result);
-
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -23,7 +20,6 @@ export async function login({email,password},dispatch,navigate) {
         toast.success("Login Success")
         // return result.data;
     } catch (error) {
-        console.log("login error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -41,10 +37,7 @@ export async function logout(token,dispatch,navigate) {
     try {
         const result=await apiConnector('post',Auth.LOGOUT_API,null,{Authorization:`Bearer ${token}`,withCredentials:true})
 
-        console.log("Logout Response is ",result);
-
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -56,7 +49,6 @@ export async function logout(token,dispatch,navigate) {
         toast.success("Logout Success")
         // return result.data;
     } catch (error) {
-        console.log("logout error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -74,10 +66,7 @@ export async function signUp({email,password,confirmPassword},dispatch,navigate)
     try {
         const result=await apiConnector('post',Auth.SIGNUP_API,{email,password,confirmPassword})
 
-        console.log("Signup Response is ",result);
-
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -89,7 +78,6 @@ export async function signUp({email,password,confirmPassword},dispatch,navigate)
         toast.success("Created Account Successfully")
         return result.data;
     } catch (error) {
-        console.log("Signup error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -108,10 +96,7 @@ export async function updateUserData({firstName,lastName},dispatch,token,navigat
     try {
         const result=await apiConnector('put',Profile.UPDATE_USER_API,{firstName,lastName},{Authorization:`Bearer ${token}`,withCredentials:true})
 
-        console.log("Update Response is ",result);
-
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -120,7 +105,6 @@ export async function updateUserData({firstName,lastName},dispatch,token,navigat
         toast.success("Successfully Updated")
         navigate('/chat');
     } catch (error) {
-        console.log("Update error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -136,13 +120,9 @@ export async function updateUserData({firstName,lastName},dispatch,token,navigat
 export async function updateProfileImage(formData,dispatch,token) {
     const toastId=toast.loading("Updating...")
     try {
-        console.log(formData);
         const result=await apiConnector('POST',Profile.UPDATE_USER_IMAGE_API,formData,{Authorization:`Bearer ${token}`,withCredentials:true, "Content-Type": "multipart/form-data"})
 
-        console.log("Update Response is ",result);
-
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -150,7 +130,6 @@ export async function updateProfileImage(formData,dispatch,token) {
         localStorage.setItem("user", JSON.stringify(result.data.user))
         toast.success("Successfully Updated Profile Image")
     } catch (error) {
-        console.log("Update error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
@@ -167,14 +146,11 @@ export async function updateProfileImage(formData,dispatch,token) {
 export async function deleteProfileImage(dispatch,token,image_id) {
     const toastId=toast.loading("Deleting...")
     try {
-        console.log(image_id);
         
         const result=await apiConnector('DELETE',Profile.DELETE_USER_IMAGE_API,{image_id:image_id},{Authorization:`Bearer ${token}`,withCredentials:true})
 
-        console.log("Delete Response is ",result);
 
         if(!result.data.success){
-            console.log(result.data.message);
             throw new Error(result.data.message)
         }
 
@@ -182,7 +158,6 @@ export async function deleteProfileImage(dispatch,token,image_id) {
         localStorage.setItem("user", JSON.stringify(result.data.user))
         toast.success("Successfully Deleted Profile Image")
     } catch (error) {
-        console.log("Delete error is ",error);
         const errorMessage =
             error.response && error.response.data && error.response.data.message
                 ? error.response.data.message
