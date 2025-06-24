@@ -46,7 +46,7 @@ function ContactsContainer() {
         </div>
         <div className=' cursor-pointer'>
           <div className='flex items-center justify-between pr-10 ml-3'>
-            <Title text='Channels'/>
+            {/* <Title text='Channels'/> */}
             {/* <CreateChannel/> */}
           </div>
         </div>
