@@ -20,7 +20,7 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"*",
+    origin:"https://chat-app-frontend-at2y.onrender.com",
     credentials:true
 }))
 app.use(

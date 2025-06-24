@@ -5,7 +5,7 @@ require('dotenv').config();
 exports.setupSocket=(server)=>{
     const io=new Server(server,{
         cors:{
-            origin:process.env.CLIENT_URL,
+            origin:"https://chat-app-frontend-at2y.onrender.com",
             methods:["GET", "POST"],
             credentials:true,
         }

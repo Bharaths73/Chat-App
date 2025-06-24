@@ -106,3 +106,24 @@ exports.getContactsForDM=async(req,res)=>{
         })
     }
 }
+
+exports.getAllContacts=async(req,res)=>{
+    try {
+        const users=await User.find({_id:{$ne:req.user.id}},"firstName lastName _id")
+
+        const contacts=users.map((user)=>({
+            label:user.firstName ? `${user.firstName} ${user.lastName}` :user.email
+        }))
+
+    return res.status(200).json({
+        success:true,
+        message:"Contacts Found",
+        contacts:contacts
+    })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
