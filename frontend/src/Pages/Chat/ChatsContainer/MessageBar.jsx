@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { GrAttachment } from "react-icons/gr";
-import { RiEmojiStickerLine } from "react-icons/ri";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import EmojiPicker from 'emoji-picker-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -94,17 +94,17 @@ function MessageBar() {
     }
 
   return (
-    <div className='h-[10vh] bg-[#1c1d25] flex justify-center items-center px-8 mb-5 gap-3'>
-        <div className='flex-1 flex bg-[#2a2b33] rounded-md items-center gap-2 pr-4'>
+    <div className='h-[10vh] bg-[#1c1d25] flex justify-center items-center px-8 mb-10 gap-3'>
+        <div className='flex-1 flex bg-[#2a2b33] rounded-full items-center gap-2 pr-4'>
             <input type='text' placeholder='Type a message' className='flex-1 lg:p-5 p-2.5 bg-transparent rounded-md focus:border-none focus:outline-none' value={message} onChange={messageHandler}/>
-            <div className='flex items-center gap-5 justify-center'>
+            <div className='flex items-center md:gap-8 gap-5 justify-center'>
             <button className='text-neutral-500 focus:border-none focus:outline-none focus:text-white transition-all duration-300' onClick={handleAttachmentClick}>
                 <GrAttachment className='md:text-2xl text-xl'/>
             </button>
             <input type='file' className='hidden' ref={fileInputRef} onChange={handleAttachmentChange}/>
             <div className='relative'>
-            <button className='text-neutral-500 focus:border-none focus:outline-none focus:text-white transition-all duration-300' onClick={showEmojiHandler}>
-                <RiEmojiStickerLine className='sm:text-2xl text-xl'/>
+            <button className='text-neutral-500 focus:border-none focus:outline-none focus:text-white transition-all duration-300 mr-1 mt-1' onClick={showEmojiHandler}>
+                <MdOutlineEmojiEmotions className='sm:text-2xl text-xl'/>
             </button>
             
             </div>
@@ -113,8 +113,8 @@ function MessageBar() {
             </div>
             </div>
         </div>
-        <button className='focus:border-none focus:outline-none focus:text-white transition-all duration-300 bg-[#8417ff] rounded-md flex items-center justify-center lg:p-5 p-2.5 hover:bg-[#741bda] focus:bg-[#741bda]' onClick={sendMessage}>
-            <IoSend className='sm:text-2xl text-xl'/>
+        <button className='focus:border-none focus:outline-none focus:text-white transition-all duration-300 bg-[#8417ff] rounded-full flex items-center justify-center lg:p-5 p-3 hover:bg-[#741bda] focus:bg-[#741bda] ' onClick={sendMessage}>
+            <IoSend className='text-2xl'/>
         </button>
     </div>
   )

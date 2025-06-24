@@ -6,6 +6,7 @@ import NewDm from './NewDm'
 import { getContactsDm } from '../../../Services/Opeartion/Contacts'
 import { useDispatch, useSelector } from 'react-redux'
 import ContactsList from './ContactsList'
+// import CreateChannel from './CreateChannel'
 
 function ContactsContainer() {
   const {selectedChatType,selectedChatData,selectedChatMessages,directMessagesContacts}=useSelector((state)=>state.chat)
@@ -43,11 +44,12 @@ function ContactsContainer() {
             <ContactsList contacts={directMessagesContacts}/>
           </div>
         </div>
-        {/* <div className=' cursor-pointer'>
+        <div className=' cursor-pointer'>
           <div className='flex items-center justify-between pr-10 ml-3'>
             <Title text='Channels'/>
+            {/* <CreateChannel/> */}
           </div>
-        </div> */}
+        </div>
         </div>
         <ProfileInfo/>
     </div>

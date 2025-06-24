@@ -6,6 +6,7 @@ import { MdFolderZip } from "react-icons/md";
 import { IoMdDownload } from "react-icons/io";
 import axios from 'axios';
 import { IoCloseSharp } from 'react-icons/io5';
+import toast from 'react-hot-toast';
 
 function MessageContainer() {
   const {selectedChatMessages,selectedChatType,selectedChatData}=useSelector((state)=>state.chat)
@@ -45,7 +46,8 @@ function MessageContainer() {
       const link = document.createElement('a');
       link.href = URL.createObjectURL(fileBlob);
       link.download = fileUrl.split("/").pop(); // Set the file name for download
-      link.click(); // Trigger the download
+      link.click();// Trigger the download
+      toast.success("File downloaded") 
       link.remove()
       window.URL.revokeObjectURL(fileBlob)
     } catch (error) {

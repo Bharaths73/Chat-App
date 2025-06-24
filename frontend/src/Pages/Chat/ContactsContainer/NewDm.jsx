@@ -108,7 +108,7 @@ function NewDm() {
                          <div key={contact._id} className='flex gap-3 items-center cursor-pointer hover:bg-[#373949] p-2' onClick={()=>selectNewContact(contact)}>
                            <div className="flex gap-3 items-center justify-center">
                               <div className='w-10 h-10 relative'>
-                                 <Avatar className='h-10 w-10  rounded-full overflow-hidden'>
+                                 <Avatar className='h-10 w-10 rounded-full overflow-hidden'>
                                    <AvatarImage src={contact?.image || avatar} alt='profile' className='object-cover w-full h-full bg-black' required/> 
                                                                {/* // <AvatarFallback>CN</AvatarFallback> */}
                                   </Avatar>

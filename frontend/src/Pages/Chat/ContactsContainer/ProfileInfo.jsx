@@ -36,7 +36,7 @@ function ProfileInfo() {
     <div className='absolute bottom-0 h-16 flex items-center justify-between px-4 w-full bg-[#2a2b33]'>
         <div className="flex gap-3 items-center justify-center">
             <div className='w-10 h-10 relative'>
-            <Avatar className='h-12 w-12  rounded-full overflow-hidden'>
+            <Avatar className='h-12 w-12 rounded-full overflow-hidden'>
                 <AvatarImage src={userData?.image || avatar} alt='profile' className='object-cover w-full h-full bg-black' required/> 
                                     {/* // <AvatarFallback>CN</AvatarFallback> */}
                 </Avatar>
