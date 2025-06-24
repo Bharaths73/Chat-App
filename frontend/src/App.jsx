@@ -7,6 +7,7 @@ import PrivateRoute from './components/Auth/PrivateRoute'
 import PublicRoute from './components/Auth/PublicRoute'
 import Profile from './Pages/Profile'
 
+//start
 function App() {
 
   return (
